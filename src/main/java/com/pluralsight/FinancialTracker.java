@@ -101,7 +101,7 @@ public class FinancialTracker {
             amount = scanner.nextDouble();
             scanner.nextLine();
 
-            if (amount <= 0){
+            if (amount <= 0) {
                 System.out.println("Cannot enter an amount less than or equal to 0");
                 return;
             }
@@ -111,7 +111,7 @@ public class FinancialTracker {
             return;
         }
 
-        transactions.add(new Transaction(date,time, description, vendor, amount));
+        transactions.add(new Transaction(date, time, description, vendor, amount));
 
     }
 
@@ -144,7 +144,7 @@ public class FinancialTracker {
             amount = -(scanner.nextDouble());
             scanner.nextLine();
 
-            if (amount >= 0){
+            if (amount >= 0) {
                 System.out.println("Cannot enter an amount less than or equal to 0");
                 return;
             }
@@ -154,7 +154,7 @@ public class FinancialTracker {
             return;
         }
 
-        transactions.add(new Transaction(date,time, description, vendor, amount));
+        transactions.add(new Transaction(date, time, description, vendor, amount));
     }
 
     private static void ledgerMenu(Scanner scanner) {
@@ -231,7 +231,6 @@ public class FinancialTracker {
     }
 
 
-
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
@@ -279,6 +278,15 @@ public class FinancialTracker {
         // The method loops through the transactions list and checks each transaction's date against the date range.
         // Transactions that fall within the date range are printed to the console.
         // If no transactions fall within the date range, the method prints a message indicating that there are no results.
+        System.out.println("Transactions between " + startDate + " - " + endDate + ": \n");
+
+        for (Transaction transaction : transactions) {
+
+            if (transaction.getDate().isAfter(startDate) && transaction.getDate().isBefore(endDate)) {
+
+                System.out.println(transaction.toString());
+            }
+        }
     }
 
     private static void filterTransactionsByVendor(String vendor) {
@@ -287,5 +295,14 @@ public class FinancialTracker {
         // The method loops through the transactions list and checks each transaction's vendor name against the specified vendor name.
         // Transactions with a matching vendor name are printed to the console.
         // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
+
+        System.out.println("Transactions by the \"" + vendor + "\": \n");
+
+        for (Transaction transaction : transactions) {
+            if (transaction.getVendor().equalsIgnoreCase(vendor)){
+
+                System.out.println(transaction.toString());
+            }
+        }
     }
 }
