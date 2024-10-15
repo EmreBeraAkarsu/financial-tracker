@@ -5,9 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class FinancialTracker {
@@ -18,6 +21,8 @@ public class FinancialTracker {
     private static final String TIME_FORMAT = "HH:mm:ss";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    private static final LocalDateTime NOW = LocalDateTime.now();
+
 
     public static void main(String[] args) {
         loadTransactions(FILE_NAME);
@@ -70,6 +75,8 @@ public class FinancialTracker {
         } catch (IOException e) {
             System.err.println("Error while reading the file");
         }
+
+
     }
 
     private static void addDeposit(Scanner scanner) {
@@ -249,9 +256,12 @@ public class FinancialTracker {
                 case "1":
                     // Generate a report for all transactions within the current month,
                     // including the date, time, description, vendor, and amount for each transaction.
+                    filterTransactionsByDate(NOW.with(TemporalAdjusters.firstDayOfMonth()).toLocalDate(), LocalDate.from(NOW));
                 case "2":
                     // Generate a report for all transactions within the previous month,
                     // including the date, time, description, vendor, and amount for each transaction.
+                    filterTransactionsByDate();
+
                 case "3":
                     // Generate a report for all transactions within the current year,
                     // including the date, time, description, vendor, and amount for each transaction.
@@ -305,4 +315,7 @@ public class FinancialTracker {
             }
         }
     }
+
+
+
 }
