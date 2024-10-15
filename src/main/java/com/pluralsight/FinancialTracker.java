@@ -1,9 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -113,12 +110,16 @@ public class FinancialTracker {
                 return;
             }
 
+            Transaction transaction = new Transaction(date, time, description, vendor, amount);
+            transactions.add(transaction);
+
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME, true));
+            bufferedWriter.write(transaction.toString());
+
         } catch (Exception e) {
             System.err.println("Error occurred entering the deposit");
-            return;
         }
 
-        transactions.add(new Transaction(date, time, description, vendor, amount));
 
     }
 
@@ -156,12 +157,18 @@ public class FinancialTracker {
                 return;
             }
 
+            Transaction transaction = new Transaction(date, time, description, vendor, (-amount));
+            transactions.add(transaction);
+
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME, true));
+            bufferedWriter.write(transaction.toString());
+
         } catch (Exception e) {
-            System.err.println("Error occurred entering the payment");
-            return;
+            System.err.println("Error occurred writing the payment");
+
         }
 
-        transactions.add(new Transaction(date, time, description, vendor, amount));
+
     }
 
     private static void ledgerMenu(Scanner scanner) {
@@ -243,38 +250,40 @@ public class FinancialTracker {
     private static void customSearch(Scanner scanner) {
 
 
-        System.out.println("Select one of the filtering options" +
-                "\n1) Filter by 1 variable"+
-                "\n2) Filter by 2 variables"+
-                "\n3) Filter by 3 variables"+
-                "\n4) Filter by 4 variables"+
-                "\n5) Filter by 5 variables");
+        while (true) {
+            System.out.println("Select one of the filtering options" +
+                    "\n1) Filter by 1 variable"+
+                    "\n2) Filter by 2 variables"+
+                    "\n3) Filter by 3 variables"+
+                    "\n4) Filter by 4 variables"+
+                    "\n5) Filter by 5 variables");
 
-        String input = scanner.nextLine();
+            String input = scanner.nextLine();
 
-        switch (input){
+            switch (input){
 
-            case "1":
+                case "1":
+    
+                    break;
+                case "2":
 
-                break;
-            case "2":
+                    break;
+                case "3":
 
-                break;
-            case "3":
+                    break;
+                case "4":
 
-                break;
-            case "4":
+                    break;
+                case "5":
 
-                break;
-            case "5":
-
-                break;
-            default:
-                System.out.println("Wrong input");
-                return;
+                    break;
+                default:
+                    System.out.println("Wrong input");
+                    return;
+            }
         }
 
-//        System.out.println("Enter the values you want to filter seperated by \"|\": ");
+//        System.out.println("Enter the values you want to filter separated by \"|\": ");
 //        String input = scanner.nextLine();
 
 
