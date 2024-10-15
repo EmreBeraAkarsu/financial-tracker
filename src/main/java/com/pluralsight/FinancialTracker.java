@@ -173,6 +173,7 @@ public class FinancialTracker {
             System.out.println("D) Deposits");
             System.out.println("P) Payments");
             System.out.println("R) Reports");
+            System.out.println("C) Custom Search");
             System.out.println("H) Home");
 
             String input = scanner.nextLine().trim();
@@ -190,6 +191,8 @@ public class FinancialTracker {
                 case "R":
                     reportsMenu(scanner);
                     break;
+                case "C":
+                    customSearch(scanner);
                 case "H":
                     running = false;
                 default:
@@ -237,6 +240,20 @@ public class FinancialTracker {
         }
     }
 
+    private static void customSearch(Scanner scanner) {
+
+
+        System.out.println("Select one of the filtering options" +
+                "\n1) ");
+
+//        System.out.println("Enter the values you want to filter seperated by \"|\": ");
+//        String input = scanner.nextLine();
+
+
+
+
+    }
+
 
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
@@ -260,18 +277,27 @@ public class FinancialTracker {
                 case "2":
                     // Generate a report for all transactions within the previous month,
                     // including the date, time, description, vendor, and amount for each transaction.
-                    filterTransactionsByDate();
+                    filterTransactionsByDate(NOW.toLocalDate().minusMonths(1).minusDays(NOW.getDayOfMonth()), NOW.toLocalDate().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()));
 
                 case "3":
                     // Generate a report for all transactions within the current year,
                     // including the date, time, description, vendor, and amount for each transaction.
+                    filterTransactionsByDate(NOW.toLocalDate().with(TemporalAdjusters.firstDayOfYear()), NOW.toLocalDate());
 
                 case "4":
                     // Generate a report for all transactions within the previous year,
                     // including the date, time, description, vendor, and amount for each transaction.
+                    filterTransactionsByDate(NOW.with(TemporalAdjusters.firstDayOfYear()).toLocalDate().minusYears(1), NOW.with(TemporalAdjusters.firstDayOfYear()).toLocalDate());
+
+
                 case "5":
                     // Prompt the user to enter a vendor name, then generate a report for all transactions
                     // with that vendor, including the date, time, description, vendor, and amount for each transaction.
+
+                    System.out.println("Enter the Vendor you want to search for: ");
+                    String vendor = scanner.nextLine();
+                    filterTransactionsByVendor(vendor);
+
                 case "0":
                     running = false;
                 default:
@@ -309,13 +335,12 @@ public class FinancialTracker {
         System.out.println("Transactions by the \"" + vendor + "\": \n");
 
         for (Transaction transaction : transactions) {
-            if (transaction.getVendor().equalsIgnoreCase(vendor)){
+            if (transaction.getVendor().equalsIgnoreCase(vendor)) {
 
                 System.out.println(transaction.toString());
             }
         }
     }
-
 
 
 }
