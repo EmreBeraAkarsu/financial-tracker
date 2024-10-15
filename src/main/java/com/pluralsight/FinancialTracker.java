@@ -244,7 +244,35 @@ public class FinancialTracker {
 
 
         System.out.println("Select one of the filtering options" +
-                "\n1) ");
+                "\n1) Filter by 1 variable"+
+                "\n2) Filter by 2 variables"+
+                "\n3) Filter by 3 variables"+
+                "\n4) Filter by 4 variables"+
+                "\n5) Filter by 5 variables");
+
+        String input = scanner.nextLine();
+
+        switch (input){
+
+            case "1":
+
+                break;
+            case "2":
+
+                break;
+            case "3":
+
+                break;
+            case "4":
+
+                break;
+            case "5":
+
+                break;
+            default:
+                System.out.println("Wrong input");
+                return;
+        }
 
 //        System.out.println("Enter the values you want to filter seperated by \"|\": ");
 //        String input = scanner.nextLine();
