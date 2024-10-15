@@ -250,37 +250,22 @@ public class FinancialTracker {
     private static void customSearch(Scanner scanner) {
 
 
-        while (true) {
-            System.out.println("Select one of the filtering options" +
-                    "\n1) Filter by 1 variable"+
-                    "\n2) Filter by 2 variables"+
-                    "\n3) Filter by 3 variables"+
-                    "\n4) Filter by 4 variables"+
-                    "\n5) Filter by 5 variables");
+        while (true){
 
-            String input = scanner.nextLine();
+            System.out.println("Enter the values you want to search for.\nLeave a value empty for the values you don't want to filter for.");
 
-            switch (input){
+            System.out.println("Enter Start Date");
+            LocalDate startDate = LocalDate.parse(scanner.nextLine());
+            System.out.println("Enter End Date: ");
+            LocalDate endDate = LocalDate.parse(scanner.nextLine());
+            System.out.println("Enter Description: ");
+            String description = scanner.nextLine();
+            System.out.println("Enter Vendor");
+            String vendor = scanner.nextLine();
+            System.out.println("Enter Amount");
+            double amount = scanner.nextDouble();
 
-                case "1":
-    
-                    break;
-                case "2":
-
-                    break;
-                case "3":
-
-                    break;
-                case "4":
-
-                    break;
-                case "5":
-
-                    break;
-                default:
-                    System.out.println("Wrong input");
-                    return;
-            }
+            
         }
 
 //        System.out.println("Enter the values you want to filter separated by \"|\": ");
