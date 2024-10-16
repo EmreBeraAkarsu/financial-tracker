@@ -69,10 +69,12 @@ public class FinancialTracker {
 
                 //Add the read line as an object to the transactions list
                 transactions.add(new Transaction(LocalDate.parse(strings[0]), LocalTime.parse(strings[1]), strings[2], strings[3], Double.parseDouble(strings[4])));
-                bufferedReader.close();
+
             }
+            bufferedReader.close();
         } catch (IOException e) {
             System.err.println("Error while reading the file");
+            e.printStackTrace();
         }
     }
 
@@ -91,10 +93,10 @@ public class FinancialTracker {
         try {
             //Prompt for the deposit details
             System.out.println("Enter the date of the deposit (yyyy-MM-dd): ");
-            date = LocalDate.parse(scanner.nextLine().trim());
+            date = LocalDate.parse(LocalDate.parse(scanner.nextLine().trim()).format(DATE_FORMATTER));
 
             System.out.println("Enter the time of the deposit (HH:mm:ss)");
-            time = LocalTime.parse(scanner.nextLine().trim());
+            time = LocalTime.parse(LocalTime.parse(scanner.nextLine().trim()).format(TIME_FORMATTER));
 
             System.out.println("Enter the description of the deposit: ");
             description = scanner.nextLine().trim();
@@ -141,10 +143,10 @@ public class FinancialTracker {
         try {
             //Prompt the user for payment details
             System.out.println("Enter the date of the payment (yyyy-MM-dd): ");
-            date = LocalDate.parse(scanner.nextLine().trim());
+            date = LocalDate.parse(LocalDate.parse(scanner.nextLine().trim()).format(DATE_FORMATTER));
 
             System.out.println("Enter the time of the payment (HH:mm:ss)");
-            time = LocalTime.parse(scanner.nextLine().trim());
+            time = LocalTime.parse(LocalTime.parse(scanner.nextLine().trim()).format(TIME_FORMATTER));
 
             System.out.println("Enter the description of the payment: ");
             description = scanner.nextLine().trim();
@@ -261,13 +263,13 @@ public class FinancialTracker {
         LocalDate startDate = null;
         try {
             System.out.println("Enter Start Date");
-            startDate = LocalDate.parse(scanner.nextLine());
+            startDate = LocalDate.parse(LocalDate.parse(scanner.nextLine().trim()).format(DATE_FORMATTER));
         } catch (Exception ignored) {
         }
         LocalDate endDate = null;
         try {
             System.out.println("Enter End Date: ");
-            endDate = LocalDate.parse(scanner.nextLine());
+            endDate = LocalDate.parse(LocalDate.parse(scanner.nextLine().trim()).format(DATE_FORMATTER));
         } catch (Exception ignored) {
         }
         System.out.println("Enter Description: ");
@@ -275,7 +277,8 @@ public class FinancialTracker {
         System.out.println("Enter Vendor");
         String vendor = scanner.nextLine().trim();
         System.out.println("Enter Amount");
-        Double amount = scanner.nextDouble();
+        String amountInput = scanner.nextLine();
+        Double amount = returnIfDouble(amountInput);
 
         List<Transaction> filteredList = transactions;
 
@@ -326,6 +329,15 @@ public class FinancialTracker {
         System.out.println("Filtered result: ");
         for (Transaction transaction : filteredList) {
             System.out.println(transaction.toString());
+        }
+    }
+
+    public static Double returnIfDouble(String input){
+
+        if (input.isEmpty()){
+            return null;
+        } else {
+            return Double.parseDouble(input);
         }
     }
 
@@ -395,8 +407,8 @@ public class FinancialTracker {
 
         for (Transaction transaction : transactions) {
 
-            if (transaction.getDate().isAfter(startDate) && transaction.getDate().isBefore(endDate)) {
-                System.out.println(transaction.toString());
+            if (transaction.getDate().isAfter(startDate.minusDays(1)) && transaction.getDate().isBefore(endDate.plusDays(1))) {
+                System.out.println(transaction);
             }
         }
     }
@@ -409,12 +421,17 @@ public class FinancialTracker {
         // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
 
         System.out.println("Transactions by the \"" + vendor + "\": \n");
+        StringBuilder stringBuilder = new StringBuilder();
 
         for (Transaction transaction : transactions) {
 
             if (transaction.getVendor().equalsIgnoreCase(vendor)) {
-                System.out.println(transaction.toString());
+                stringBuilder.append("\n" + transaction.toString());
             }
+        }
+
+        if (stringBuilder.isEmpty()){
+            System.out.println("No results found!");
         }
     }
 }
