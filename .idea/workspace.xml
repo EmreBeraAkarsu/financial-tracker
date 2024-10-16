@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f00d83b9-73b2-40f0-9549-dc4152cc7753" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pluralsight/FinancialTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pluralsight/FinancialTracker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,5 +77,26 @@
       <updated>1728659013046</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pluralsight/FinancialTracker.java</url>
+          <line>185</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pluralsight/FinancialTracker.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/pluralsight/FinancialTracker.java</url>
+          <line>338</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

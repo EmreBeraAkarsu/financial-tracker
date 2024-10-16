@@ -69,6 +69,7 @@ public class FinancialTracker {
 
                 //Add the read line as an object to the transactions list
                 transactions.add(new Transaction(LocalDate.parse(strings[0]), LocalTime.parse(strings[1]), strings[2], strings[3], Double.parseDouble(strings[4])));
+                bufferedReader.close();
             }
         } catch (IOException e) {
             System.err.println("Error while reading the file");
@@ -118,6 +119,8 @@ public class FinancialTracker {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME, true));
             bufferedWriter.write(transaction.toString());
 
+            bufferedWriter.close();
+
         } catch (Exception e) {
             System.err.println("Error occurred entering the deposit");
         }
@@ -165,6 +168,8 @@ public class FinancialTracker {
 
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME, true));
             bufferedWriter.write(transaction.toString());
+
+            bufferedWriter.close();
 
         } catch (Exception e) {
             System.err.println("Error occurred writing the payment");
@@ -250,71 +255,79 @@ public class FinancialTracker {
 
     private static void customSearch(Scanner scanner) {
 
-            System.out.println("Enter the values you want to search for.\nLeave a value empty for the values you don't want to filter for.");
+        System.out.println("Enter the values you want to search for.\nLeave a value empty for the values you don't want to filter for.");
 
-            //Prompt for custom search values
+        //Prompt for custom search values
+        LocalDate startDate = null;
+        try {
             System.out.println("Enter Start Date");
-            LocalDate startDate = LocalDate.parse(scanner.nextLine());
+            startDate = LocalDate.parse(scanner.nextLine());
+        } catch (Exception ignored) {
+        }
+        LocalDate endDate = null;
+        try {
             System.out.println("Enter End Date: ");
-            LocalDate endDate = LocalDate.parse(scanner.nextLine());
-            System.out.println("Enter Description: ");
-            String description = scanner.nextLine().trim();
-            System.out.println("Enter Vendor");
-            String vendor = scanner.nextLine().trim();
-            System.out.println("Enter Amount");
-            Double amount = scanner.nextDouble();
+            endDate = LocalDate.parse(scanner.nextLine());
+        } catch (Exception ignored) {
+        }
+        System.out.println("Enter Description: ");
+        String description = scanner.nextLine().trim();
+        System.out.println("Enter Vendor");
+        String vendor = scanner.nextLine().trim();
+        System.out.println("Enter Amount");
+        Double amount = scanner.nextDouble();
 
-            List<Transaction> filteredList = transactions;
+        List<Transaction> filteredList = transactions;
 
            /* Filter the list by;
             First checking if the search value exists
             Then remove the unmatched objects from the list
             Result is a list of objects filtered down    */
-            if (startDate != null){
-                for (Transaction transaction : filteredList) {
-                    if (transaction.getDate().isBefore(startDate)){
-                        filteredList.remove(transaction);
-                    }
-                }
-            }
-
-            if (endDate != null){
-                for (Transaction transaction : filteredList) {
-                    if (transaction.getDate().isAfter(endDate)){
-                        filteredList.remove(transaction);
-                    }
-                }
-            }
-
-            if (!(description.isEmpty())){
-                for (Transaction transaction : filteredList) {
-                    if (!(transaction.getDescription().equalsIgnoreCase(description))){
-                        filteredList.remove(transaction);
-                    }
-                }
-            }
-
-            if(!(vendor.isEmpty())){
-                for (Transaction transaction : filteredList) {
-                    if (!(transaction.getVendor().equalsIgnoreCase(vendor))){
-                        filteredList.remove(transaction);
-                    }
-                }
-            }
-
-            if (amount != null){
-                for (Transaction transaction : filteredList) {
-                    if (transaction.getAmount() != amount){
-                        filteredList.remove(transaction);
-                    }
-                }
-            }
-
-        System.out.println("Filtered result: ");
+        if (startDate != null) {
             for (Transaction transaction : filteredList) {
-                System.out.println(transaction.toString());
+                if (transaction.getDate().isBefore(startDate)) {
+                    filteredList.remove(transaction);
+                }
             }
         }
+
+        if (endDate != null) {
+            for (Transaction transaction : filteredList) {
+                if (transaction.getDate().isAfter(endDate)) {
+                    filteredList.remove(transaction);
+                }
+            }
+        }
+
+        if (!(description.isEmpty())) {
+            for (Transaction transaction : filteredList) {
+                if (!(transaction.getDescription().equalsIgnoreCase(description))) {
+                    filteredList.remove(transaction);
+                }
+            }
+        }
+
+        if (!(vendor.isEmpty())) {
+            for (Transaction transaction : filteredList) {
+                if (!(transaction.getVendor().equalsIgnoreCase(vendor))) {
+                    filteredList.remove(transaction);
+                }
+            }
+        }
+
+        if (amount != null) {
+            for (Transaction transaction : filteredList) {
+                if (Math.abs(transaction.getAmount()) != amount) {
+                    filteredList.remove(transaction);
+                }
+            }
+        }
+
+        System.out.println("Filtered result: ");
+        for (Transaction transaction : filteredList) {
+            System.out.println(transaction.toString());
+        }
+    }
 
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
@@ -335,20 +348,24 @@ public class FinancialTracker {
                     // Generate a report for all transactions within the current month,
                     // including the date, time, description, vendor, and amount for each transaction.
                     filterTransactionsByDate(NOW.with(TemporalAdjusters.firstDayOfMonth()).toLocalDate(), LocalDate.from(NOW));
+                    break;
                 case "2":
                     // Generate a report for all transactions within the previous month,
                     // including the date, time, description, vendor, and amount for each transaction.
-                    filterTransactionsByDate(NOW.toLocalDate().minusMonths(1).minusDays(NOW.getDayOfMonth()), NOW.toLocalDate().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()));
+                    filterTransactionsByDate(NOW.toLocalDate().minusMonths(1).minusDays((NOW.getDayOfMonth()) - 1), NOW.toLocalDate().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()));
+                    break;
 
                 case "3":
                     // Generate a report for all transactions within the current year,
                     // including the date, time, description, vendor, and amount for each transaction.
                     filterTransactionsByDate(NOW.toLocalDate().with(TemporalAdjusters.firstDayOfYear()), NOW.toLocalDate());
+                    break;
 
                 case "4":
                     // Generate a report for all transactions within the previous year,
                     // including the date, time, description, vendor, and amount for each transaction.
                     filterTransactionsByDate(NOW.with(TemporalAdjusters.firstDayOfYear()).toLocalDate().minusYears(1), NOW.with(TemporalAdjusters.firstDayOfYear()).toLocalDate());
+                    break;
 
                 case "5":
                     // Prompt the user to enter a vendor name, then generate a report for all transactions
@@ -356,6 +373,7 @@ public class FinancialTracker {
                     System.out.println("Enter the Vendor you want to search for: ");
                     String vendor = scanner.nextLine();
                     filterTransactionsByVendor(vendor);
+                    break;
 
                 case "0":
                     running = false;
