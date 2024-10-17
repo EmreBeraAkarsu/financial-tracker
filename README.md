@@ -10,8 +10,17 @@ Briefly describe what this Java console application does. Mention its purpose an
 
 List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 
-- As a user, I want to be able to input my data, so that the application can process it accordingly.
-- As a user, I want to receive immediate feedback, so I can understand what to do next.
+- As a user, I want to have a custom option to filter transactions, so I can provide the values for the filtering to have flexible search ability
+- As a user, I want to filter reports based on the vendor, so I can see a specific list of transactions according to my needs
+- As a user, I want to filter reports based on the date, so I can better understand the transaction within a certain timer period
+- As a user, I want to have a reports' menu, so I can navigate different filtering options easily
+- As a user, I want to see all payments, so I can filter down the output for all payments
+- As a user, I want to see all deposits, so I can filter down the output for all deposits
+- As a user, I want to be able to see all the transactions, so I can review all the transactions I have
+- As a user, I want to add a deposit, so I can update the transactions list with new deposits.
+- As a user, I want to add a payment, so I can have the most updated list of transactions with new payments
+- As a user, I want to see a home screen menu, so I can navigate to different features of the application from the menu
+- As a user, I want to see a ledger menu, so I can navigate different transactions output screens easily
 
 ## Setup
 
@@ -34,37 +43,50 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Java: corretto-17.0.12
+- Additional libraries used in the project:
+java.io.*;
+java.time.LocalDate;
+java.time.LocalDateTime;
+java.time.LocalTime;
+java.time.format.DateTimeFormatter;
+java.time.temporal.TemporalAdjusters;
+java.util.ArrayList;
+java.util.List;
+java.util.Scanner;
 
 ## Demo
 
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
+### Screenshots
 
-![Application Screenshot](path/to/your/screenshot.png)
+C:\Users\Student\OneDrive - Year Up- BOS\Desktop\pluralsight\capstones\FinancialTracker\imgs
 
 ## Future Work
 
-Outline potential future enhancements or functionalities you might consider adding:
+- Additional feature to be developed:
+Creating a GUI
+Having it as a web application
+More data taken from each transaction
 
-- Additional feature to be developed.
 - Improvement of current functionalities.
+More negative Scenario coverage
+Sorting the output of the transactions
+
 
 ## Resources
 
 List resources such as tutorials, articles, or documentation that helped you during the project.
 
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
+- https://www.studytonight.com/java-examples/java-localdate-minusmonth-method#:~:text=Java%20minusMonth()%20method%20is,and%20returns%20a%20new%20LocalDate%20.
+- https://www.studytonight.com/java-examples/java-localdate-minusmonth-method#:~:text=Java%20minusMonth()%20method%20is,and%20returns%20a%20new%20LocalDate%20.
 
 ## Team Members
 
-- **Name 1** - Specific contributions or roles.
-- **Name 2** - Specific contributions or roles.
+- **Name 1** - Emre Akarsu (Only Member)
+
 
 ## Thanks
 
 Express gratitude towards those who provided help, guidance, or resources:
 
-- Thank you to [Mentor's Name] for continuous support and guidance.
-- A special thanks to all teammates for their dedication and teamwork.
+- Thank you to Raymond Maroun for continuous support and guidance.
