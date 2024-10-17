@@ -412,11 +412,19 @@ public class FinancialTracker {
         // If no transactions fall within the date range, the method prints a message indicating that there are no results.
         System.out.println("Transactions between " + startDate + " - " + endDate + ": \n");
 
+        boolean ifFound = false;
+
         for (Transaction transaction : transactions) {
 
             if (transaction.getDate().isAfter(startDate.minusDays(1)) && transaction.getDate().isBefore(endDate.plusDays(1))) {
                 System.out.println(transaction);
+
+                ifFound = true;
             }
+        }
+
+        if (!ifFound){
+            System.out.println("No transaction within the time period!");
         }
     }
 
@@ -427,18 +435,20 @@ public class FinancialTracker {
         // Transactions with a matching vendor name are printed to the console.
         // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
 
-        System.out.println("Transactions by the \"" + vendor + "\": \n");
+        System.out.println("Transactions by \"" + vendor + "\": ");
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Transaction transaction : transactions) {
 
             if (transaction.getVendor().equalsIgnoreCase(vendor)) {
-                stringBuilder.append("\n" + transaction.toString());
+                stringBuilder.append("\n" + transaction);
             }
         }
 
         if (stringBuilder.isEmpty()){
             System.out.println("No results found!");
         }
+
+        System.out.println(stringBuilder);
     }
 }
