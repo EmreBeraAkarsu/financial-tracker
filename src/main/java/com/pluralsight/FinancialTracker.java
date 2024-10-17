@@ -209,6 +209,7 @@ public class FinancialTracker {
                     customSearch(scanner);
                 case "H":
                     running = false;
+                    break;
                 default:
                     System.out.println("Invalid option");
                     break;
@@ -359,23 +360,28 @@ public class FinancialTracker {
                 case "1":
                     // Generate a report for all transactions within the current month,
                     // including the date, time, description, vendor, and amount for each transaction.
+                    //First day of month to Now
                     filterTransactionsByDate(NOW.with(TemporalAdjusters.firstDayOfMonth()).toLocalDate(), LocalDate.from(NOW));
                     break;
                 case "2":
                     // Generate a report for all transactions within the previous month,
                     // including the date, time, description, vendor, and amount for each transaction.
+                    //(Now - 1 month) - (1 day + today's day value) to (Last day of this month - 1 month)
                     filterTransactionsByDate(NOW.toLocalDate().minusMonths(1).minusDays((NOW.getDayOfMonth()) - 1), NOW.toLocalDate().minusMonths(1).with(TemporalAdjusters.lastDayOfMonth()));
                     break;
 
                 case "3":
                     // Generate a report for all transactions within the current year,
                     // including the date, time, description, vendor, and amount for each transaction.
+                    //First day of this year to now
+
                     filterTransactionsByDate(NOW.toLocalDate().with(TemporalAdjusters.firstDayOfYear()), NOW.toLocalDate());
                     break;
 
                 case "4":
                     // Generate a report for all transactions within the previous year,
                     // including the date, time, description, vendor, and amount for each transaction.
+                    //(First day of this year - 1 year) to first day of this year
                     filterTransactionsByDate(NOW.with(TemporalAdjusters.firstDayOfYear()).toLocalDate().minusYears(1), NOW.with(TemporalAdjusters.firstDayOfYear()).toLocalDate());
                     break;
 
@@ -389,6 +395,7 @@ public class FinancialTracker {
 
                 case "0":
                     running = false;
+                    break;
 
                 default:
                     System.out.println("Invalid option");
