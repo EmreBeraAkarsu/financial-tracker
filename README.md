@@ -2,13 +2,10 @@
 
 ## Description of the Project
 
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
-
+This project is a financial application that allows users to manipulate the transactions data by adding deposits and payments. Additionally, this application has built-in features to search for specific transactions and filtering options so the users can find the relative data easily.
 
 
 ## User Stories
-
-List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 
 - As a user, I want to have a custom option to filter transactions, so I can provide the values for the filtering to have flexible search ability
 - As a user, I want to filter reports based on the vendor, so I can see a specific list of transactions according to my needs
@@ -44,7 +41,10 @@ Follow these steps to get your application running within IntelliJ IDEA:
 ## Technologies Used
 
 - Java: corretto-17.0.12
+
+
 - Additional libraries used in the project:
+
 java.io.*
 java.time.LocalDate
 java.time.LocalDateTime
@@ -61,16 +61,20 @@ java.util.Iterator
 
 ### Screenshots
 
-C:\Users\Student\OneDrive - Year Up- BOS\Desktop\pluralsight\capstones\FinancialTracker\imgs
+FinancialTracker\imgs
 
 ## Future Work
 
 - Additional feature to be developed:
+
 Creating a GUI
 Having it as a web application
 More data taken from each transaction
 
+
+
 - Improvement of current functionalities.
+
 More negative Scenario coverage
 Sorting the output of the transactions
 
@@ -84,7 +88,7 @@ List resources such as tutorials, articles, or documentation that helped you dur
 
 ## Team Members
 
-- **Name 1** - Emre Akarsu (Only Member)
+- **Emre Akarsu** - (Only Member)
 
 
 ## Thanks
