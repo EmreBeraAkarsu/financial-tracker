@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -288,17 +289,21 @@ public class FinancialTracker {
             Then remove the unmatched objects from the list
             Result is a list of objects filtered down    */
         if (startDate != null) {
-            for (Transaction transaction : filteredList) {
+            Iterator<Transaction> iterator = filteredList.iterator();
+            while (iterator.hasNext()) {
+                Transaction transaction = iterator.next();
                 if (transaction.getDate().isBefore(startDate)) {
-                    filteredList.remove(transaction);
+                    iterator.remove();
                 }
             }
         }
 
         if (endDate != null) {
-            for (Transaction transaction : filteredList) {
+            Iterator<Transaction> iterator = filteredList.iterator();
+            while (iterator.hasNext()) {
+                Transaction transaction = iterator.next();
                 if (transaction.getDate().isAfter(endDate)) {
-                    filteredList.remove(transaction);
+                    iterator.remove();
                 }
             }
         }

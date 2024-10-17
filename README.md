@@ -45,15 +45,17 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 - Java: corretto-17.0.12
 - Additional libraries used in the project:
-java.io.*;
-java.time.LocalDate;
-java.time.LocalDateTime;
-java.time.LocalTime;
-java.time.format.DateTimeFormatter;
-java.time.temporal.TemporalAdjusters;
-java.util.ArrayList;
-java.util.List;
-java.util.Scanner;
+java.io.*
+java.time.LocalDate
+java.time.LocalDateTime
+java.time.LocalTime
+java.time.format.DateTimeFormatter
+java.time.temporal.TemporalAdjusters
+java.util.ArrayList
+java.util.List
+java.util.Scanner
+java.util.Iterator
+
 
 ## Demo
 
