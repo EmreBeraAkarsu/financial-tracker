@@ -309,25 +309,34 @@ public class FinancialTracker {
         }
 
         if (!(description.isEmpty())) {
-            for (Transaction transaction : filteredList) {
+            Iterator<Transaction> iterator = filteredList.iterator();
+
+            while (iterator.hasNext()) {
+                Transaction transaction = iterator.next();
                 if (!(transaction.getDescription().equalsIgnoreCase(description))) {
-                    filteredList.remove(transaction);
+                    iterator.remove();
                 }
             }
         }
 
         if (!(vendor.isEmpty())) {
-            for (Transaction transaction : filteredList) {
+            Iterator<Transaction> iterator = filteredList.iterator();
+
+            while (iterator.hasNext()) {
+                Transaction transaction = iterator.next();
                 if (!(transaction.getVendor().equalsIgnoreCase(vendor))) {
-                    filteredList.remove(transaction);
+                    iterator.remove();
                 }
             }
         }
 
         if (amount != null) {
-            for (Transaction transaction : filteredList) {
+            Iterator<Transaction> iterator = filteredList.iterator();
+
+            while (iterator.hasNext()) {
+                Transaction transaction = iterator.next();
                 if (Math.abs(transaction.getAmount()) != amount) {
-                    filteredList.remove(transaction);
+                    iterator.remove();
                 }
             }
         }
@@ -338,9 +347,9 @@ public class FinancialTracker {
         }
     }
 
-    public static Double returnIfDouble(String input){
+    public static Double returnIfDouble(String input) {
 
-        if (input.isEmpty()){
+        if (input.isEmpty()) {
             return null;
         } else {
             return Double.parseDouble(input);
@@ -428,7 +437,7 @@ public class FinancialTracker {
             }
         }
 
-        if (!ifFound){
+        if (!ifFound) {
             System.out.println("No transaction within the time period!");
         }
     }
@@ -450,7 +459,7 @@ public class FinancialTracker {
             }
         }
 
-        if (stringBuilder.isEmpty()){
+        if (stringBuilder.isEmpty()) {
             System.out.println("No results found!");
         }
 
