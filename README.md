@@ -85,6 +85,7 @@ List resources such as tutorials, articles, or documentation that helped you dur
 
 - https://www.studytonight.com/java-examples/java-localdate-minusmonth-method#:~:text=Java%20minusMonth()%20method%20is,and%20returns%20a%20new%20LocalDate%20.
 - https://www.studytonight.com/java-examples/java-localdate-minusmonth-method#:~:text=Java%20minusMonth()%20method%20is,and%20returns%20a%20new%20LocalDate%20.
+- https://www.w3schools.com/java/java_iterator.asp
 
 ## Team Members
 
